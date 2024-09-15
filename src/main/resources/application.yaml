@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: currency-converter-service
+
+server:
+  address: localhost
+  port: 8091
