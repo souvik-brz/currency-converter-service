@@ -6,6 +6,12 @@ on:
   pull_request:
     branches: [ main ]
 
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+  security-events: write
+
 jobs:
   dependabot-check:
     name: "Check for Vulnerable Dependencies"
