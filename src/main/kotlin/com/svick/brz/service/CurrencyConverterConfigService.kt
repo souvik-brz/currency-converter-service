@@ -3,6 +3,8 @@ package com.svick.brz.service
 import com.svick.brz.application.CurrencyConverterApplication
 import com.svick.brz.application.model.CurrencyConverterConfigRequest
 import com.svick.brz.application.model.CurrencyConverterConfigResponse
+import com.svick.brz.config.logger.AppLogger
+import com.svick.brz.config.logger.LogLevel
 import com.svick.brz.respository.CurrencyConverterConfigRepository
 import com.svick.brz.utils.DateTimeUtils.utcNow
 import kotlinx.coroutines.CoroutineDispatcher
@@ -16,7 +18,8 @@ import org.springframework.stereotype.Service
 @Service
 internal class CurrencyConverterConfigService(
     private val repository: CurrencyConverterConfigRepository,
-    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
+    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
+    private val logger: AppLogger
 ) :
     CurrencyConverterApplication {
     override suspend fun createConfig(request: CurrencyConverterConfigRequest): CurrencyConverterConfigResponse {
@@ -24,6 +27,7 @@ internal class CurrencyConverterConfigService(
             repository.existsByBaseCode(request.currencyCode)
         }
         if (existing) {
+            logger.log(level = LogLevel.ERROR, appProgressPoint = "FAILED", message = "Failed")
             throw Exception("Need to be implemented")
         }
         return withContext(ioDispatcher) {
@@ -37,7 +41,9 @@ internal class CurrencyConverterConfigService(
     ): CurrencyConverterConfigResponse {
         val existing = withContext(ioDispatcher) {
             repository.findByIdOrNull(id)
-        } ?: throw Exception("Need to be implemented")
+        } ?: throw Exception("Need to be implemented").apply {
+            logger.log(level = LogLevel.ERROR, appProgressPoint = "FAILED", message = "Failed")
+        }
 
         return withContext(ioDispatcher) {
             repository.save(
@@ -53,11 +59,15 @@ internal class CurrencyConverterConfigService(
 
     override suspend fun config(id: Long): CurrencyConverterConfigResponse = withContext(ioDispatcher) {
         repository.findByIdOrNull(id)
-    }?.toModel() ?: throw Exception("Need to implemented")
+    }?.toModel() ?: throw Exception("Need to implemented").apply {
+        logger.log(level = LogLevel.ERROR, appProgressPoint = "FAILED", message = "Failed")
+    }
 
     override suspend fun config(currencyCode: String): CurrencyConverterConfigResponse = withContext(ioDispatcher) {
         repository.findByBaseCode(currencyCode)
-    }?.toModel() ?: throw Exception("Need to implemented")
+    }?.toModel() ?: throw Exception("Need to implemented").apply {
+        logger.log(level = LogLevel.ERROR, appProgressPoint = "FAILED", message = "Failed")
+    }
 
     override suspend fun configs(pageable: Pageable): Page<CurrencyConverterConfigResponse> =
         withContext(ioDispatcher) {
