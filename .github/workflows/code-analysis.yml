@@ -38,6 +38,8 @@ jobs:
         run: ./gradlew dependencies
 
       - name: Analyze Dependencies for Vulnerabilities
+        env:
+          NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
         run: ./gradlew dependencyCheckAnalyze
 
       - name: Upload Dependency-Check Report
