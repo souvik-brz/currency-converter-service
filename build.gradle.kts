@@ -42,6 +42,15 @@ kotlin {
     }
 }
 
+tasks.withType<JavaCompile>().configureEach {
+    options.isFork = true
+}
+
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+tasks.withType<Test>().configureEach {
+    reports.html.required = true
+    reports.junitXml.required = true
 }
