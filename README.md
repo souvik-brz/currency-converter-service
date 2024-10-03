@@ -9,4 +9,4 @@ Service to fetch and store currency exchange rates and expose rest endpoints for
 
 # Actions Status
 
-[![Build and Publish to GitHub Packages](https://github.com/souvik-brz/currency-converter-service/actions/workflows/build-project.yml/badge.svg)](https://github.com/souvik-brz/currency-converter-service/actions/workflows/build-project.yml)    
+[![Build and Publish to GitHub Packages](https://github.com/souvik-brz/currency-converter-service/actions/workflows/clean-build.yml/badge.svg)](https://github.com/souvik-brz/currency-converter-service/actions/workflows/clean-build.yml)    
