@@ -1,4 +1,4 @@
-name: Clean Build and Security Checks
+name: Clean Build
 
 on:
   push:
