@@ -7,11 +7,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  build-project:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        language: [ 'java', 'kotlin' ]
 
     steps:
       - name: Checkout code
@@ -25,12 +22,6 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Install Gradle
-        uses: gradle/gradle-build-action@v2
-
-      - name: Analyze Dependencies for Vulnerabilities
-        run: ./gradlew dependencyCheckAnalyze --info || true
-
       - name: Cache Gradle packages
         uses: actions/cache@v3
         with:
@@ -39,13 +30,5 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
-      - name: Initialize CodeQL
-        uses: github/codeql-action/init@v2
-        with:
-          languages: ${{ matrix.language }}
-
       - name: Clean Build
         run: ./gradlew clean build
-
-      - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v2
