@@ -1,4 +1,4 @@
-package com.svick.brz.model
+package com.svick.brz.currencyconverter.model
 
 import java.time.ZonedDateTime
 

@@ -1,7 +1,7 @@
-package com.svick.brz.application
+package com.svick.brz.currencyconverter.application
 
-import com.svick.brz.application.model.CurrencyConverterConfigRequest
-import com.svick.brz.application.model.CurrencyConverterConfigResponse
+import com.svick.brz.currencyconverter.application.model.CurrencyConverterConfigRequest
+import com.svick.brz.currencyconverter.application.model.CurrencyConverterConfigResponse
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service

@@ -1,4 +1,4 @@
-package com.svick.brz.respository.model
+package com.svick.brz.currencyconverter.respository.model
 
 import jakarta.persistence.*
 import org.hibernate.annotations.CreationTimestamp
@@ -19,7 +19,7 @@ data class CurrencyExchangeRateEntity(
     val timeNextUpdateUtc: ZonedDateTime,
     val baseCode: String,
     @CreationTimestamp
-    val createdAt: ZonedDateTime = ZonedDateTime.now(),
+    val createdAt: ZonedDateTime,
     @UpdateTimestamp
     val modifiedAt: ZonedDateTime? = null
 )

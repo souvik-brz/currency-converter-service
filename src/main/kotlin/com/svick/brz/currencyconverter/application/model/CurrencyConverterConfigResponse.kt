@@ -1,6 +1,6 @@
-package com.svick.brz.application.model
+package com.svick.brz.currencyconverter.application.model
 
-import com.svick.brz.model.CurrencyConverterConfigResponseV1
+import com.svick.brz.currencyconverter.model.CurrencyConverterConfigResponseV1
 import java.time.ZonedDateTime
 
 data class CurrencyConverterConfigResponse(

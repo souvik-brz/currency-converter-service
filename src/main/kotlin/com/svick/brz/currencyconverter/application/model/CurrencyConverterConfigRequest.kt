@@ -1,7 +1,7 @@
-package com.svick.brz.application.model
+package com.svick.brz.currencyconverter.application.model
 
-import com.svick.brz.respository.model.CurrencyConverterConfigEntity
-import com.svick.brz.utils.DateTimeUtils.utcNow
+import com.svick.brz.currencyconverter.respository.model.CurrencyConverterConfigEntity
+import com.svick.brz.currencyconverter.utils.utcNow
 import java.time.ZonedDateTime
 
 data class CurrencyConverterConfigRequest(
@@ -18,6 +18,7 @@ data class CurrencyConverterConfigRequest(
         enabled = enabled,
         frequencyInMinutes = frequencyInMinutes,
         startDate = startDate ?: utcNow(),
-        endDate = endDate
+        endDate = endDate,
+        createdAt = utcNow()
     )
 }

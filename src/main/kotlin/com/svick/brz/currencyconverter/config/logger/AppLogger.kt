@@ -1,14 +1,14 @@
-package com.svick.brz.config.logger
+package com.svick.brz.currencyconverter.config.logger
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import org.springframework.stereotype.Service
+import org.springframework.stereotype.Component
 
-@Service
-internal class AppLogger(
+@Component
+class AppLogger(
     className: Class<*> = AppLogger::class.java,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
     private val logger: Logger = LoggerFactory.getLogger(className)
@@ -16,13 +16,13 @@ internal class AppLogger(
 
     suspend fun <T> log(
         level: LogLevel,
-        appProgressPoint: String,
+        progress: String,
         message: T,
         throwable: Throwable? = null,
     ) {
         withContext(ioDispatcher) {
             val logMessage = message.toString()
-            val finalMessage = "[$appProgressPoint] - $logMessage"
+            val finalMessage = "[$progress] - $logMessage"
 
             when (level) {
                 LogLevel.INFO -> logger.info(finalMessage)

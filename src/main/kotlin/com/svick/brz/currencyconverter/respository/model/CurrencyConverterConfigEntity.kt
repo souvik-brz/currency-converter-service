@@ -1,7 +1,6 @@
-package com.svick.brz.respository.model
+package com.svick.brz.currencyconverter.respository.model
 
-import com.svick.brz.application.model.CurrencyConverterConfigResponse
-import com.svick.brz.utils.DateTimeUtils.utcNow
+import com.svick.brz.currencyconverter.application.model.CurrencyConverterConfigResponse
 import jakarta.persistence.*
 import org.hibernate.annotations.CreationTimestamp
 import org.hibernate.annotations.UpdateTimestamp
@@ -16,11 +15,13 @@ data class CurrencyConverterConfigEntity(
     val baseCode: String,
     val enabled: Boolean,
     val frequencyInMinutes: Int,
-    val startDate: ZonedDateTime = utcNow(),
+    val startDate: ZonedDateTime,
     val endDate: ZonedDateTime? = null,
     @CreationTimestamp
-    val createdAt: ZonedDateTime = utcNow(),
+    @Column(insertable = false, updatable = false, nullable = false)
+    val createdAt: ZonedDateTime,
     @UpdateTimestamp
+    @Column(insertable = false, updatable = false)
     val modifiedAt: ZonedDateTime? = null
 ) {
     fun toModel() = CurrencyConverterConfigResponse(

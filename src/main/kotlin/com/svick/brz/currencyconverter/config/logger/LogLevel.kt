@@ -1,4 +1,4 @@
-package com.svick.brz.config.logger
+package com.svick.brz.currencyconverter.config.logger
 
 enum class LogLevel {
     INFO,
