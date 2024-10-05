@@ -20,9 +20,8 @@ internal class CurrencyConverterAdminControllerV1(private val application: Curre
     internal suspend fun createConfig(
         @Validated @RequestBody request: CurrencyConverterConfigRequestV1,
         serverWebExchange: ServerWebExchange
-    ): ResponseEntity<CurrencyConverterConfigResponseV1> {
-        return ResponseEntity.ok(application.createConfig(request.toModel()).toDto())
-    }
+    ): ResponseEntity<CurrencyConverterConfigResponseV1> =
+        ResponseEntity.ok(application.createConfig(request.toModel()).toDto())
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
@@ -30,27 +29,22 @@ internal class CurrencyConverterAdminControllerV1(private val application: Curre
         @PathVariable id: Long,
         @Validated @RequestBody request: CurrencyConverterConfigRequestV1,
         serverWebExchange: ServerWebExchange
-    ): ResponseEntity<CurrencyConverterConfigResponseV1> {
-        return ResponseEntity.ok(application.updateConfig(id, request.toModel()).toDto())
-    }
+    ): ResponseEntity<CurrencyConverterConfigResponseV1> =
+        ResponseEntity.ok(application.updateConfig(id, request.toModel()).toDto())
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     internal suspend fun config(
         @PathVariable id: Long,
         serverWebExchange: ServerWebExchange
-    ): ResponseEntity<CurrencyConverterConfigResponseV1> {
-        return ResponseEntity.ok(application.config(id).toDto())
-    }
+    ): ResponseEntity<CurrencyConverterConfigResponseV1> = ResponseEntity.ok(application.config(id).toDto())
 
     @GetMapping("/by-code")
     @ResponseStatus(HttpStatus.OK)
     internal suspend fun config(
         @RequestParam(value = "currencyCode", required = true) currencyCode: String,
         serverWebExchange: ServerWebExchange
-    ): ResponseEntity<CurrencyConverterConfigResponseV1> {
-        return ResponseEntity.ok(application.config(currencyCode).toDto())
-    }
+    ): ResponseEntity<CurrencyConverterConfigResponseV1> = ResponseEntity.ok(application.config(currencyCode).toDto())
 
     @GetMapping(params = ["page", "size"])
     @ResponseStatus(HttpStatus.OK)
@@ -58,8 +52,7 @@ internal class CurrencyConverterAdminControllerV1(private val application: Curre
         @RequestParam(value = "page", defaultValue = "1") page: Int,
         @RequestParam(value = "size", defaultValue = "20") size: Int,
         serverWebExchange: ServerWebExchange
-    ): ResponseEntity<Page<CurrencyConverterConfigResponseV1>> {
-        return ResponseEntity.ok(application.configs(PageRequest.of(page, size)).map { it.toDto() })
-    }
+    ): ResponseEntity<Page<CurrencyConverterConfigResponseV1>> =
+        ResponseEntity.ok(application.configs(PageRequest.of(page, size)).map { it.toDto() })
 
 }
