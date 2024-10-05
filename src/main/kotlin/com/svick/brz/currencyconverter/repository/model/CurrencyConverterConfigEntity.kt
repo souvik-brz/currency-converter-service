@@ -21,7 +21,7 @@ data class CurrencyConverterConfigEntity(
     @Column(insertable = false, updatable = false, nullable = false)
     val createdAt: ZonedDateTime,
     @UpdateTimestamp
-    @Column(insertable = false, updatable = false)
+    @Column(insertable = false)
     val modifiedAt: ZonedDateTime? = null
 ) {
     fun toModel() = CurrencyConverterConfigResponse(
