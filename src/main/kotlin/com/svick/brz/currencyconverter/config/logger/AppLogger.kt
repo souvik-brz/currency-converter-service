@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
 
 @Component
-internal class AppLogger(
+class AppLogger(
     className: Class<*> = AppLogger::class.java,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
     private val logger: Logger = LoggerFactory.getLogger(className)

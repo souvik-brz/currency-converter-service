@@ -1,4 +1,4 @@
-package com.svick.brz.currencyconverter.service
+package com.svick.brz.currencyconverter.persistence
 
 import com.svick.brz.currencyconverter.repository.CurrencyConverterConfigRepository
 import com.svick.brz.currencyconverter.repository.model.CurrencyConverterConfigEntity
@@ -11,7 +11,7 @@ import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 
 @Service
-internal class CurrencyConverterConfigRepositoryService(
+internal class CurrencyConverterConfigPersistenceService(
     private val repository: CurrencyConverterConfigRepository,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
@@ -36,5 +36,9 @@ internal class CurrencyConverterConfigRepositoryService(
 
     internal suspend fun findAll(pageable: Pageable): Page<CurrencyConverterConfigEntity> = withContext(ioDispatcher) {
         repository.findAll(pageable)
+    }
+
+    internal suspend fun findAll(): List<CurrencyConverterConfigEntity> = withContext(ioDispatcher) {
+        repository.findAllByParams()
     }
 }

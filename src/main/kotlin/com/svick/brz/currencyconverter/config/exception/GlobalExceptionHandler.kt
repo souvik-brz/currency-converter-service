@@ -1,5 +1,6 @@
 package com.svick.brz.currencyconverter.config.exception
 
+import com.svick.brz.currencyconverter.config.exception.error.ClientApiException
 import com.svick.brz.currencyconverter.config.exception.error.DuplicateResourceException
 import com.svick.brz.currencyconverter.config.exception.error.ResourceNotFoundException
 import com.svick.brz.currencyconverter.config.exception.model.ErrorResponse
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
 
 @ControllerAdvice
-internal class GlobalExceptionHandler(private val logger: AppLogger) {
+internal class GlobalExceptionHandler(private val logger: AppLogger = AppLogger(className = GlobalExceptionHandler::class.java)) {
 
     @ExceptionHandler(ResourceNotFoundException::class)
     internal suspend fun handleResourceNotFoundException(exception: ResourceNotFoundException): ResponseEntity<ErrorResponse> =
@@ -38,6 +39,20 @@ internal class GlobalExceptionHandler(private val logger: AppLogger) {
                 it
             )
         }.andLog(progress = exception.cause?.message.toString(), message = exception.localizedMessage)
+
+
+    @ExceptionHandler(ClientApiException::class)
+    internal suspend fun handleClientApiException(exception: ClientApiException): ResponseEntity<ErrorResponse> =
+        HttpStatus.INTERNAL_SERVER_ERROR.let {
+            ResponseEntity(
+                ErrorResponse(
+                    statusCode = it.value(),
+                    message = exception.localizedMessage,
+                    progress = exception.cause?.message.toString()
+                ),
+                it
+            )
+        }
 
     private suspend fun <T> T.andLog(progress: String, message: String) = apply {
         logger.log(level = LogLevel.ERROR, progress = progress, message = message)
