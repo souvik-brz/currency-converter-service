@@ -9,3 +9,10 @@ databaseChangeLog:
         - sqlFile:
             path: changelog_2.sql
             relativeToChangelogFile: true
+  - changeSet:
+      id: 2
+      author: souvik-brz
+      changes:
+        - sqlFile:
+            path: changelog_3.sql
+            relativeToChangelogFile: true

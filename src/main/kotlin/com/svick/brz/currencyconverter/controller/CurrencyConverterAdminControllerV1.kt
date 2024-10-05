@@ -1,8 +1,10 @@
 package com.svick.brz.currencyconverter.controller
 
-import com.svick.brz.currencyconverter.application.CurrencyConverterApplication
+import com.svick.brz.currencyconverter.application.CurrencyConverterConfigApplication
 import com.svick.brz.currencyconverter.model.CurrencyConverterConfigRequestV1
 import com.svick.brz.currencyconverter.model.CurrencyConverterConfigResponseV1
+import com.svick.brz.currencyconverter.utils.CurrencyConverterConfigObject.toDto
+import com.svick.brz.currencyconverter.utils.CurrencyConverterConfigObject.toModel
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
 import org.springframework.http.HttpStatus
@@ -13,7 +15,7 @@ import org.springframework.web.server.ServerWebExchange
 
 @RestController
 @RequestMapping("/v1/admin/currency-converter")
-internal class CurrencyConverterAdminControllerV1(private val application: CurrencyConverterApplication) {
+internal class CurrencyConverterAdminControllerV1(private val application: CurrencyConverterConfigApplication) {
 
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
