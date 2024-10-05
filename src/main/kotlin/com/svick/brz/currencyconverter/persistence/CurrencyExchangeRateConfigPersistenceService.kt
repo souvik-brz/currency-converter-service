@@ -2,6 +2,7 @@ package com.svick.brz.currencyconverter.persistence
 
 import com.svick.brz.currencyconverter.repository.CurrencyExchangeRateRepository
 import com.svick.brz.currencyconverter.repository.model.CurrencyExchangeRateConfigEntity
+import jakarta.transaction.Transactional
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -13,6 +14,7 @@ class CurrencyExchangeRateConfigPersistenceService(
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
 
+    @Transactional
     internal suspend fun save(entity: CurrencyExchangeRateConfigEntity): CurrencyExchangeRateConfigEntity =
         withContext(ioDispatcher) {
             repository.save(entity)

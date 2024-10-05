@@ -2,9 +2,12 @@ package com.svick.brz.currencyconverter.utils
 
 import com.svick.brz.currencyconverter.application.model.CurrencyConverterConfig
 import com.svick.brz.currencyconverter.application.model.CurrencyExchangeRateConfig
+import com.svick.brz.currencyconverter.application.model.ExchangeCurrency
 import com.svick.brz.currencyconverter.client.model.ExchangeRateV6
 import com.svick.brz.currencyconverter.model.CurrencyConverterConfigRequestV1
 import com.svick.brz.currencyconverter.model.CurrencyConverterConfigResponseV1
+import com.svick.brz.currencyconverter.model.ExchangeCurrencyRequestV1
+import com.svick.brz.currencyconverter.model.ExchangeCurrencyResponseV1
 import com.svick.brz.currencyconverter.repository.model.ConversionRateConfigEntity
 import com.svick.brz.currencyconverter.repository.model.CurrencyConverterConfigEntity
 import com.svick.brz.currencyconverter.repository.model.CurrencyExchangeRateConfigEntity
@@ -62,6 +65,17 @@ object CurrencyExchangeRateConfigObject {
         }
     )
 
+    fun CurrencyExchangeRateConfigEntity.toModel() = CurrencyExchangeRateConfig(
+        id = id,
+        result = result,
+        documentation = documentation,
+        termsOfUse = termsOfUse,
+        timeLastUpdateUtc = timeLastUpdateUtc,
+        timeNextUpdateUtc = timeNextUpdateUtc,
+        baseCode = baseCode,
+        conversionRates = conversionRates.associate { it.currencyCode to it.rate }
+    )
+
     fun ExchangeRateV6.toModel() = CurrencyExchangeRateConfig(
         id = 0,
         result = result,
@@ -71,5 +85,23 @@ object CurrencyExchangeRateConfigObject {
         timeNextUpdateUtc = Instant.ofEpochMilli(timeNextUpdateUnix).atZone(utcZone()),
         baseCode = baseCode,
         conversionRates = conversionRates
+    )
+}
+
+object ExchangeCurrencyObject {
+    fun ExchangeCurrencyRequestV1.toModel() = ExchangeCurrency(
+        fromValue = fromValue,
+        fromCurrencyCode = fromCurrencyCode,
+        toValue = toValue,
+        toCurrencyCode = toCurrencyCode
+    )
+
+    fun ExchangeCurrency.toDto() = ExchangeCurrencyResponseV1(
+        fromValue = fromValue,
+        fromCurrencyCode = fromCurrencyCode,
+        toValue = toValue,
+        toCurrencyCode = toCurrencyCode,
+        termsOfUse = termsOfUse,
+        exchangeRateLastUpdated = exchangeRateLastUpdated
     )
 }
