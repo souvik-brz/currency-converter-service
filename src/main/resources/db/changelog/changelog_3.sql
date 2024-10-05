@@ -1,7 +1,7 @@
 create TABLE IF NOT EXISTS conversion_rate(
     id                          BIGINT          NOT NULL PRIMARY KEY AUTO_INCREMENT,
     currency_code               VARCHAR(8)      NOT NULL,
-    rate                        DECIMAL(5,4)    NOT NULL,
+    rate                        DECIMAL(65,30)    NOT NULL,
     currency_exchange_rate_id   BIGINT          NOT NULL,
     created_at                  DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP,
     modified_at                 DATETIME        NULL ON update CURRENT_TIMESTAMP
