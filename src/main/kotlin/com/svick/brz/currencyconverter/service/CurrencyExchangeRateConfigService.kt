@@ -1,6 +1,7 @@
 package com.svick.brz.currencyconverter.service
 
 import com.svick.brz.currencyconverter.application.CurrencyExchangeRateConfigApplication
+import com.svick.brz.currencyconverter.application.model.CurrencyExchangeRateConfig
 import com.svick.brz.currencyconverter.client.CurrencyExchangeRateClient
 import com.svick.brz.currencyconverter.config.logger.AppLogger
 import com.svick.brz.currencyconverter.config.logger.LogLevel
@@ -47,4 +48,6 @@ class CurrencyExchangeRateConfigService(
         }
     }
 
+    override suspend fun exchangeRate(fromCurrencyCode: String): CurrencyExchangeRateConfig? =
+        repositoryService.byBaseCode(fromCurrencyCode)?.toModel()
 }

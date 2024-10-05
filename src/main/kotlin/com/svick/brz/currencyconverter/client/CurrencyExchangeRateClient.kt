@@ -11,7 +11,7 @@ import org.springframework.web.reactive.function.client.awaitExchangeOrNull
 class CurrencyExchangeRateClient(private val webClient: WebClient) {
 
     suspend fun exchangeRate(currencyCode: String): ExchangeRateV6 =
-        webClient.get().uri("/latest/$currencyCode").awaitExchangeOrNull { clientResponse ->
+        webClient.get().uri("/5329964c70888a69b136d8e4/latest/$currencyCode").awaitExchangeOrNull { clientResponse ->
             if (clientResponse.statusCode().is2xxSuccessful) {
                 clientResponse.awaitBodyOrNull<ExchangeRateV6>()
             } else {
