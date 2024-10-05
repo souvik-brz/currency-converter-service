@@ -1,4 +1,4 @@
-package com.svick.brz.currencyconverter.respository.model
+package com.svick.brz.currencyconverter.repository.model
 
 import com.svick.brz.currencyconverter.application.model.CurrencyConverterConfigResponse
 import jakarta.persistence.*

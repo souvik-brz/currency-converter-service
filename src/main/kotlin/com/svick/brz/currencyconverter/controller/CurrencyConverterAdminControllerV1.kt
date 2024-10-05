@@ -3,6 +3,8 @@ package com.svick.brz.currencyconverter.controller
 import com.svick.brz.currencyconverter.application.CurrencyConverterApplication
 import com.svick.brz.currencyconverter.model.CurrencyConverterConfigRequestV1
 import com.svick.brz.currencyconverter.model.CurrencyConverterConfigResponseV1
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.PageRequest
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.validation.annotation.Validated
@@ -48,6 +50,16 @@ internal class CurrencyConverterAdminControllerV1(private val application: Curre
         serverWebExchange: ServerWebExchange
     ): ResponseEntity<CurrencyConverterConfigResponseV1> {
         return ResponseEntity.ok(application.config(currencyCode).toDto())
+    }
+
+    @GetMapping(params = ["page", "size"])
+    @ResponseStatus(HttpStatus.OK)
+    internal suspend fun configs(
+        @RequestParam(value = "page", defaultValue = "1") page: Int,
+        @RequestParam(value = "size", defaultValue = "20") size: Int,
+        serverWebExchange: ServerWebExchange
+    ): ResponseEntity<Page<CurrencyConverterConfigResponseV1>> {
+        return ResponseEntity.ok(application.configs(PageRequest.of(page, size)).map { it.toDto() })
     }
 
 }

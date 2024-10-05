@@ -1,6 +1,6 @@
-package com.svick.brz.currencyconverter.respository
+package com.svick.brz.currencyconverter.repository
 
-import com.svick.brz.currencyconverter.respository.model.CurrencyConverterConfigEntity
+import com.svick.brz.currencyconverter.repository.model.CurrencyConverterConfigEntity
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 

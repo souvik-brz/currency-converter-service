@@ -1,6 +1,6 @@
 package com.svick.brz.currencyconverter.application.model
 
-import com.svick.brz.currencyconverter.respository.model.CurrencyConverterConfigEntity
+import com.svick.brz.currencyconverter.repository.model.CurrencyConverterConfigEntity
 import com.svick.brz.currencyconverter.utils.utcNow
 import java.time.ZonedDateTime
 

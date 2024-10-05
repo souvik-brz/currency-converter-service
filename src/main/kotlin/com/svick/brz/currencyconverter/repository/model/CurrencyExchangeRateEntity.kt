@@ -1,4 +1,4 @@
-package com.svick.brz.currencyconverter.respository.model
+package com.svick.brz.currencyconverter.repository.model
 
 import jakarta.persistence.*
 import org.hibernate.annotations.CreationTimestamp
