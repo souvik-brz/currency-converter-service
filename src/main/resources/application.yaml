@@ -3,7 +3,7 @@ spring:
     name: currency-converter-service
 
   datasource:
-    url: jdbc:mysql://localhost:3306/currency_converter_service?useSSL=false&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://localhost:3306/currency_converter_service?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: currency
     password: currency_password

@@ -1,6 +1,6 @@
 package com.svick.brz.currencyconverter.config.logger
 
-enum class LogLevel {
+internal enum class LogLevel {
     INFO,
     DEBUG,
     ERROR,

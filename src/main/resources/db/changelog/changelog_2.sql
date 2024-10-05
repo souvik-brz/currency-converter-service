@@ -9,4 +9,4 @@ create TABLE IF NOT EXISTS currency_converter_configs(
     modified_at             DATETIME    NULL ON update CURRENT_TIMESTAMP
 );
 
-create INDEX uidx_base_code ON currency_converter_configs(base_code);
+create UNIQUE INDEX uidx_base_code ON currency_converter_configs(base_code);

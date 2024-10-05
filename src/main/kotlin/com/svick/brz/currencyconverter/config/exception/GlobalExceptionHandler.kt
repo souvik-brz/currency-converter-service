@@ -7,10 +7,10 @@ import com.svick.brz.currencyconverter.config.logger.AppLogger
 import com.svick.brz.currencyconverter.config.logger.LogLevel
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
-import org.springframework.web.bind.annotation.RestControllerAdvice
 
-@RestControllerAdvice
+@ControllerAdvice
 internal class GlobalExceptionHandler(private val logger: AppLogger) {
 
     @ExceptionHandler(ResourceNotFoundException::class)
@@ -27,7 +27,7 @@ internal class GlobalExceptionHandler(private val logger: AppLogger) {
         }.andLog(progress = exception.cause?.message.toString(), message = exception.localizedMessage)
 
     @ExceptionHandler(DuplicateResourceException::class)
-    internal suspend fun handleDuplicateResourceException(exception: ResourceNotFoundException): ResponseEntity<ErrorResponse> =
+    internal suspend fun handleDuplicateResourceException(exception: DuplicateResourceException): ResponseEntity<ErrorResponse> =
         HttpStatus.BAD_REQUEST.let {
             ResponseEntity(
                 ErrorResponse(
