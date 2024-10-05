@@ -37,9 +37,9 @@ class CurrencyExchangeRateConfigService(
                 timeNextUpdateUtc = latestExchangeRate.timeNextUpdateUtc,
                 conversionRates = latestExchangeRate.conversionRates.map { latest ->
                     val existing = existingExchangeRate.conversionRates.firstOrNull { it.currencyCode == latest.key }
-                    existing?.copy(rate = latest.value) ?: ConversionRateConfigEntity(
+                    existing?.copy(rate = latest.value.toBigDecimal()) ?: ConversionRateConfigEntity(
                         currencyCode = latest.key,
-                        rate = latest.value
+                        rate = latest.value.toBigDecimal()
                     )
                 }
             ))

@@ -61,7 +61,7 @@ object CurrencyExchangeRateConfigObject {
         timeNextUpdateUtc = timeNextUpdateUtc,
         baseCode = baseCode,
         conversionRates = conversionRates.map {
-            ConversionRateConfigEntity(currencyCode = it.key, rate = it.value)
+            ConversionRateConfigEntity(currencyCode = it.key, rate = it.value.toBigDecimal())
         }
     )
 
@@ -73,7 +73,7 @@ object CurrencyExchangeRateConfigObject {
         timeLastUpdateUtc = timeLastUpdateUtc,
         timeNextUpdateUtc = timeNextUpdateUtc,
         baseCode = baseCode,
-        conversionRates = conversionRates.associate { it.currencyCode to it.rate }
+        conversionRates = conversionRates.associate { it.currencyCode to it.rate.toDouble() }
     )
 
     fun ExchangeRateV6.toModel() = CurrencyExchangeRateConfig(
@@ -92,7 +92,7 @@ object ExchangeCurrencyObject {
     fun ExchangeCurrencyRequestV1.toModel() = ExchangeCurrency(
         fromValue = fromValue,
         fromCurrencyCode = fromCurrencyCode,
-        toValue = toValue,
+        toValue = 0.0,
         toCurrencyCode = toCurrencyCode
     )
 
