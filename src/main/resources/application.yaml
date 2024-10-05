@@ -8,7 +8,7 @@ spring:
     username: sa
     password: password
   jpa:
-    defer-datasource-initialization: true
+#    defer-datasource-initialization: true
     hibernate:
       ddl-auto: create
 
@@ -19,20 +19,10 @@ spring:
       settings:
         trace: false
         web-admin-password: password
-        web-allow-others: false
 
-#  flyway:
-#    enabled: true
-#    baseline-on-migrate: true
-#    schemas:
-#      - currency_converter_service
-#    sql-migration-suffixes:
-#      - .sql
+  liquibase:
+    change-log: classpath:db/changelog/master_changelog.yml
 
-
-#  autoconfigure:
-#    exclude:
-#        - org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
 server:
   address: localhost
   port: 8091

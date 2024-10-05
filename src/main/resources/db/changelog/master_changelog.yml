@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: souvik-brz
+      changes:
+        - sqlFile:
+            path: changelog_1.sql
+            relativeToChangelogFile: true
+        - sqlFile:
+            path: changelog_2.sql
+            relativeToChangelogFile: true
