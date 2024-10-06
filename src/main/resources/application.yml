@@ -33,4 +33,5 @@ management:
 app:
   config:
     exchange-rate-api-url: https://v6.exchangerate-api.com/v6
+    exchange-rate-api-key: 5329964c70888a69b136d8e4
     quartz-scheduler-enabled: false

@@ -1,3 +1,6 @@
+import java.text.SimpleDateFormat
+import java.util.*
+
 plugins {
     kotlin("jvm") version "1.9.25"
     kotlin("plugin.spring") version "1.9.25"
@@ -8,6 +11,7 @@ plugins {
 }
 
 group = "com.svick.brz"
+version = SimpleDateFormat("yyyyMMdd-HHmmss").format(Date())
 
 java {
     toolchain {
@@ -28,6 +32,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-webflux")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
+    implementation("io.github.resilience4j:resilience4j-retry:2.2.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
     implementation("org.liquibase:liquibase-core")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
@@ -55,4 +60,13 @@ tasks.withType<Test> {
 tasks.withType<Test>().configureEach {
     reports.html.required = true
     reports.junitXml.required = true
+}
+
+tasks.withType<Jar> {
+    manifest {
+        attributes(
+            "Implementation-Title" to project.name,
+            "Implementation-Version" to version
+        )
+    }
 }

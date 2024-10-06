@@ -14,5 +14,5 @@ interface CurrencyConverterConfigApplication {
     suspend fun configs(pageable: Pageable): Page<CurrencyConverterConfig>
 
     // This method is for internal use should not be exposed in rest api
-    suspend fun configs(): List<CurrencyConverterConfig>
+    suspend fun activeConfigs(): List<CurrencyConverterConfig>
 }
