@@ -1,3 +1,6 @@
+import java.text.SimpleDateFormat
+import java.util.*
+
 plugins {
     kotlin("jvm") version "1.9.25"
     kotlin("plugin.spring") version "1.9.25"
@@ -8,6 +11,7 @@ plugins {
 }
 
 group = "com.svick.brz"
+version = SimpleDateFormat("yyyyMMdd-HHmmss").format(Date())
 
 java {
     toolchain {
@@ -55,4 +59,13 @@ tasks.withType<Test> {
 tasks.withType<Test>().configureEach {
     reports.html.required = true
     reports.junitXml.required = true
+}
+
+tasks.withType<Jar> {
+    manifest {
+        attributes(
+            "Implementation-Title" to project.name,
+            "Implementation-Version" to version
+        )
+    }
 }
