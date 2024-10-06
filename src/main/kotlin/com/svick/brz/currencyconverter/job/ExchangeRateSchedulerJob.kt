@@ -29,7 +29,7 @@ internal class ExchangeRateSchedulerJob(
                         progress = "START_EXCHANGE_RATE_JOB",
                         message = "Exchange Rate Job Started"
                     )
-                    currencyConverterConfigApplication.configs().takeIf { it.isNotEmpty() }?.map {
+                    currencyConverterConfigApplication.activeConfigs().takeIf { it.isNotEmpty() }?.map {
                         currencyExchangeRateConfigApplication.createExchangeRateConfig(it.currencyCode)
                     }
 

@@ -63,15 +63,15 @@ internal class CurrencyConverterConfigConfigService(
                 cause = Throwable("GET_CURRENCY_CONVERTER_CONFIG")
             )
 
-    override suspend fun configs(pageable: Pageable): Page<CurrencyConverterConfig> =
+    override suspend fun activeConfigs(pageable: Pageable): Page<CurrencyConverterConfig> =
         repositoryService.findAll(pageable).map { it.toModel() }
 
-    override suspend fun configs(): List<CurrencyConverterConfig> =
-        repositoryService.findAll().map { it.toModel() }.also {
+    override suspend fun activeConfigs(): List<CurrencyConverterConfig> =
+        repositoryService.findAll().map { it.toModel() }.also { it ->
             logger.log(
                 level = LogLevel.INFO,
                 progress = "FETCH_CONFIGS",
-                message = "Fetch all enabled configs $it"
+                message = "Fetch all enabled configs ${it.joinToString(separator = ",") { config -> config.currencyCode }}"
             )
         }
 }

@@ -23,7 +23,7 @@ class CurrencyExchangeRateConfigService(
         logger.log(
             level = LogLevel.INFO,
             progress = "FETCH_EXCHANGE_RATE",
-            message = "Fetch Exchange Rate - $latestExchangeRate"
+            message = "Fetch Exchange Rate for currency code - ${latestExchangeRate.baseCode}"
         )
 
         val existingExchangeRate = repositoryService.byBaseCode(currencyCode)

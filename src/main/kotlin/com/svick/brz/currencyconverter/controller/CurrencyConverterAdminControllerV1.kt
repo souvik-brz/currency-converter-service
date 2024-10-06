@@ -55,6 +55,6 @@ internal class CurrencyConverterAdminControllerV1(private val application: Curre
         @RequestParam(value = "size", defaultValue = "20") size: Int,
         serverWebExchange: ServerWebExchange
     ): ResponseEntity<Page<CurrencyConverterConfigResponseV1>> =
-        ResponseEntity.ok(application.configs(PageRequest.of(page, size)).map { it.toDto() })
+        ResponseEntity.ok(application.activeConfigs(PageRequest.of(page, size)).map { it.toDto() })
 
 }

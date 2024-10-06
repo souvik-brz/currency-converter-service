@@ -1,6 +1,7 @@
 package com.svick.brz.currencyconverter.config.exception
 
 import com.svick.brz.currencyconverter.config.exception.error.ClientApiException
+import com.svick.brz.currencyconverter.config.exception.error.CurrencyNotSupportedException
 import com.svick.brz.currencyconverter.config.exception.error.DuplicateResourceException
 import com.svick.brz.currencyconverter.config.exception.error.ResourceNotFoundException
 import com.svick.brz.currencyconverter.config.exception.model.ErrorResponse
@@ -43,7 +44,20 @@ internal class GlobalExceptionHandler(private val logger: AppLogger = AppLogger(
 
     @ExceptionHandler(ClientApiException::class)
     internal suspend fun handleClientApiException(exception: ClientApiException): ResponseEntity<ErrorResponse> =
-        HttpStatus.INTERNAL_SERVER_ERROR.let {
+        HttpStatus.SERVICE_UNAVAILABLE.let {
+            ResponseEntity(
+                ErrorResponse(
+                    statusCode = it.value(),
+                    message = exception.localizedMessage,
+                    progress = exception.cause?.message.toString()
+                ),
+                it
+            )
+        }
+
+    @ExceptionHandler(CurrencyNotSupportedException::class)
+    internal suspend fun handleCurrencyNotSupportedException(exception: CurrencyNotSupportedException): ResponseEntity<ErrorResponse> =
+        HttpStatus.NOT_ACCEPTABLE.let {
             ResponseEntity(
                 ErrorResponse(
                     statusCode = it.value(),
