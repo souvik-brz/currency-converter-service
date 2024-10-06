@@ -63,11 +63,11 @@ internal class CurrencyConverterConfigConfigService(
                 cause = Throwable("GET_CURRENCY_CONVERTER_CONFIG")
             )
 
-    override suspend fun activeConfigs(pageable: Pageable): Page<CurrencyConverterConfig> =
+    override suspend fun configs(pageable: Pageable): Page<CurrencyConverterConfig> =
         repositoryService.findAll(pageable).map { it.toModel() }
 
     override suspend fun activeConfigs(): List<CurrencyConverterConfig> =
-        repositoryService.findAll().map { it.toModel() }.also { it ->
+        repositoryService.findAll().map { it.toModel() }.also {
             logger.log(
                 level = LogLevel.INFO,
                 progress = "FETCH_CONFIGS",
